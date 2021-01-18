@@ -1,0 +1,53 @@
+<input
+  type="text"
+  [formControl]="inputValue"
+  atvInput
+  readOnly
+  (click)="onClick()"
+/>
+<div
+  *ngIf="isSelectVisible"
+  class="select-wrapper absolute z-10 w-full flex flex-col rounded shadow-lg bg-white px-6 py-2 text-gray-700 overflow-auto"
+>
+  <div class="nav flex justify-between items-center py-2">
+    <div class="now">
+      <button class="btn btn-primary btn-small" (click)="goToDay(now)">
+        Now
+      </button>
+    </div>
+    <div class="active">{{ calActive }}</div>
+    <div class="months">
+      <button class="btn btn-primary btn-small" (click)="onChangeMonth(-1)">
+        Prev
+      </button>
+      <button class="btn btn-primary btn-small" (click)="onChangeMonth(1)">
+        Next
+      </button>
+    </div>
+  </div>
+  <div class="weekdays flex cursor-default">
+    <div
+      class="weekday flex-1 text-center capitalize font-bold"
+      *ngFor="let weekday of weekdays"
+    >
+      {{ weekday }}
+    </div>
+  </div>
+  <div class="calendar">
+    <div class="row flex" *ngFor="let row of calendar">
+      <div
+        *ngFor="let day of row"
+        class="day flex-1 text-center cursor-pointer"
+        [ngClass]="{
+          'prev': isDayPrev(day),
+          'next': isDayNext(day),
+          'now': day.format('YYYYMMDD') === now.format('YYYYMMDD'),
+          'active': day.format('YYYYMMDD') === activeDate.format('YYYYMMDD')
+        }"
+        (click)="goToDay(day)"
+      >
+        {{ day.date() }}
+      </div>
+    </div>
+  </div>
+</div>

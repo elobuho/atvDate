@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  position: relative;
+}
+
+.calendar {
+  .row {
+    .day {
+      &.prev,
+      &.next {
+        color: #a0aec0;
+      }
+      &.now {
+        font-weight: bold;
+      }
+      &.active {
+        border-radius: 10rem;
+        background-color: #e2e8f0;
+      }
+    }
+  }
+}
